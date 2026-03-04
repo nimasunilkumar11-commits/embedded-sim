@@ -2,8 +2,12 @@
 #include <unistd.h>
 #include "sensor.h"
 #include "controller.h"
+#include "logger.h"
+
+
 
 int main() {
+    init_logger();
 
     init_sensors();
 
@@ -21,6 +25,6 @@ int main() {
 
         sleep(2);
     }
-
+    close_logger();
     return 0;
 }
