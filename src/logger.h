@@ -7,6 +7,8 @@ typedef enum {
     LOG_ERROR
 } LogLevel;
 
+void init_logger(void);
 void log_message(LogLevel level, const char *message);
+void close_logger(void);
 
 #endif
