@@ -2,7 +2,15 @@
 #include <time.h>
 #include "logger.h"
 
+static FILE *log_file = NULL;
+
+void init_logger(void) {
+    log_file = fopen("system.log", "a");
+}
+
 void log_message(LogLevel level, const char *message) {
+
+    if (!log_file) return;
 
     const char *level_str;
 
@@ -16,8 +24,17 @@ void log_message(LogLevel level, const char *message) {
     time_t now = time(NULL);
     struct tm *t = localtime(&now);
 
-    printf("[%02d:%02d:%02d] [%s] %s\n",
-           t->tm_hour, t->tm_min, t->tm_sec,
-           level_str,
-           message);
+    fprintf(log_file,
+            "[%02d:%02d:%02d] [%s] %s\n",
+            t->tm_hour, t->tm_min, t->tm_sec,
+            level_str,
+            message);
+
+    fflush(log_file);
+}
+
+void close_logger(void) {
+    if (log_file) {
+        fclose(log_file);
+    }
 }
