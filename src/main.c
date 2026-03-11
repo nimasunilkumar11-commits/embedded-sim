@@ -1,8 +1,8 @@
 #include "sensor.h"
 #include "logger.h"
+#include "config.h"
 #include "scheduler.h"
 #include "statistics.h"
-stats_init();
 
 int main()
 {
@@ -11,7 +11,7 @@ int main()
     load_config();
     stats_init();
 
-    while(1)
+    while (1)
     {
         scheduler_run();
     }
