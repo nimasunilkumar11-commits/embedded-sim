@@ -7,15 +7,13 @@
 
 void process_data(SensorData data) {
 
-    if (data.temperature > TEMP_THRESHOLD) {
-        log_message(LOG_WARNING, "High Temperature Detected");
-    }
+    if (data.temperature < -40 || data.temperature > 125)
+{
+    log_message(LOG_ERROR, "Temperature sensor fault");
+}
 
-    if (data.pressure < PRESSURE_LOW) {
-        log_message(LOG_WARNING, "Low Pressure Detected");
-    }
-
-    if (data.motion) {
-        log_message(LOG_INFO, "Motion Detected");
-    }
+if (data.pressure < 800 || data.pressure > 1200)
+{
+    log_message(LOG_ERROR, "Pressure sensor fault");
+}
 }
